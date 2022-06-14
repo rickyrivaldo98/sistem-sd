@@ -16,14 +16,10 @@ const mengelolaMataPelajaranPage = () => {
                                 <input type="text" placeholder="Cari" className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-3xl bg-white py-3 px-20" />
                                 <div className="fas fa-search text-2xl left-6 absolute inset-y-center z-10"></div>
                             </div>
+
                             <div className="mx-2">
                                 <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-2xl bg-white py-3 px-10">
-                                    Print Rapor
-                                </div>
-                            </div>
-                            <div className="mx-2">
-                                <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-2xl bg-white py-3 px-10">
-                                    Print Leger
+                                    Tambah Mata Pelajaran
                                 </div>
                             </div>
                         </div>
