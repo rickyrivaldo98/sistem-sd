@@ -1,4 +1,25 @@
-const mengelolaGuruPage = () => {
+import { useEffect, useState } from "react";
+import { getId, getLevel } from "../../pages/utils/common";
+import axios from "axios";
+import Link from 'next/link'
+const MengelolaGuruPage = () => {
+    const [Loading, setLoading] = useState(true);
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        axios
+            .get(`https://methodist-app.vercel.app/guru/index/`)
+            .then((res) => {
+                // alert("masuk");
+                setLoading(true);
+                // console.log(res.data.data)
+                setData(res.data.data.user)
+                setLoading(false);
+            })
+            .catch((err) => {
+                alert("Akun Tidak Ditemukan");
+            });
+    }, [data]);
     return (
         <>
             <div className="flex flex-wrap">
@@ -18,9 +39,11 @@ const mengelolaGuruPage = () => {
                             </div>
 
                             <div className="mx-2">
-                                <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-2xl bg-white py-3 px-10">
-                                    Tambah Guru
-                                </div>
+                                <Link href={'/mengelolaGuru/tambahGuru/'}>
+                                    <a className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-2xl bg-white py-3 px-10">
+                                        Tambah Guru
+                                    </a>
+                                </Link>
                             </div>
                         </div>
                         <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-2xl bg-white">
@@ -29,13 +52,10 @@ const mengelolaGuruPage = () => {
                                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                         <tr>
                                             <th scope="col" className="px-6 py-3">
-                                                Nama Murid
+                                                Nama Guru
                                             </th>
                                             <th scope="col" className="px-6 py-3">
-                                                NIS
-                                            </th>
-                                            <th scope="col" className="px-6 py-3">
-                                                Predikat
+                                                Password
                                             </th>
                                             <th scope="col" className="px-6 py-3">
                                                 Aksi
@@ -43,51 +63,26 @@ const mengelolaGuruPage = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                                                Murid A
-                                            </th>
-                                            <td className="px-6 py-4">
-                                                121212
-                                            </td>
-                                            <td className="px-6 py-4">
-                                                A
-                                            </td>
-                                            <td className="px-6 py-4 flex">
-                                                <a href="#" className="font-medium text-black bg-keempat py-2 px-5 rounded-2xl mr-2">Edit Rapor</a>
-                                                <a href="#" className="font-medium text-black bg-keempat py-2 px-5 rounded-2xl">Print Rapor</a>
-                                            </td>
-                                        </tr>
-                                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                                                Murid A
-                                            </th>
-                                            <td className="px-6 py-4">
-                                                121212
-                                            </td>
-                                            <td className="px-6 py-4">
-                                                A
-                                            </td>
-                                            <td className="px-6 py-4 flex">
-                                                <a href="#" className="font-medium text-black bg-keempat py-2 px-5 rounded-2xl mr-2">Edit Rapor</a>
-                                                <a href="#" className="font-medium text-black bg-keempat py-2 px-5 rounded-2xl">Print Rapor</a>
-                                            </td>
-                                        </tr>
-                                        <tr className="bg-white dark:bg-gray-800">
-                                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                                                Murid A
-                                            </th>
-                                            <td className="px-6 py-4">
-                                                121212
-                                            </td>
-                                            <td className="px-6 py-4">
-                                                A
-                                            </td>
-                                            <td className="px-6 py-4 flex">
-                                                <a href="#" className="font-medium text-black bg-keempat py-2 px-5 rounded-2xl mr-2">Edit Rapor</a>
-                                                <a href="#" className="font-medium text-black bg-keempat py-2 px-5 rounded-2xl">Print Rapor</a>
-                                            </td>
-                                        </tr>
+                                        {
+                                            data.map((x) => (
+                                                <>
+                                                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                                                            {x.nama_guru}
+                                                        </th>
+                                                        <td className="px-6 py-4">
+                                                            {x.password}
+                                                        </td>
+                                                        <td className="px-6 py-4 flex">
+                                                            <Link href={'/pengolahanRapor/' + x.id}>
+                                                                <a className="font-medium text-black bg-keempat py-2 px-5 rounded-2xl mr-2">Edit Detail</a>
+                                                            </Link>
+                                                            <a className="font-medium text-white bg-ketiga py-2 px-5 rounded-2xl">Hapus</a>
+                                                        </td>
+                                                    </tr>
+                                                </>
+                                            ))
+                                        }
                                     </tbody>
                                 </table>
                             </div>
@@ -101,4 +96,4 @@ const mengelolaGuruPage = () => {
     );
 }
 
-export default mengelolaGuruPage;
+export default MengelolaGuruPage;

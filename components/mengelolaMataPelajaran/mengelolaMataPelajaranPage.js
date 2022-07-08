@@ -1,4 +1,37 @@
-const mengelolaMataPelajaranPage = () => {
+import { useEffect, useState } from "react";
+import { getId, getLevel } from "../../pages/utils/common";
+import axios from "axios";
+import Link from 'next/link'
+const MengelolaMataPelajaranPage = () => {
+    const [Loading, setLoading] = useState(true);
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        axios
+            .get(`https://methodist-app.vercel.app/mata-pelajaran/index/`)
+            .then((res) => {
+                // alert("masuk");
+                setLoading(true);
+                // console.log(res.data.data)
+                setData(res.data.data.user)
+                setLoading(false);
+            })
+            .catch((err) => {
+                alert("Akun Tidak Ditemukan");
+            });
+    }, [data]);
+
+    const handleDelete = (e) => {
+        // e.preventDefault();
+        axios
+            .post(`https://methodist-app.vercel.app/mata-pelajaran/delete/${e}`)
+            .then((res) => {
+                alert("Mata Pelajaran Sudah Di Hapus");
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
     return (
         <>
             <div className="flex flex-wrap">
@@ -18,9 +51,11 @@ const mengelolaMataPelajaranPage = () => {
                             </div>
 
                             <div className="mx-2">
-                                <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-2xl bg-white py-3 px-10">
-                                    Tambah Mata Pelajaran
-                                </div>
+                                <Link href={'/mengelolaMataPelajaran/tambahMataPelajaran/'}>
+                                    <a className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-2xl bg-white py-3 px-10">
+                                        Tambah Mata Pelajaran
+                                    </a>
+                                </Link>
                             </div>
                         </div>
                         <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-2xl bg-white">
@@ -29,13 +64,10 @@ const mengelolaMataPelajaranPage = () => {
                                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                         <tr>
                                             <th scope="col" className="px-6 py-3">
-                                                Nama Murid
+                                                Nama Mata Pelajaran
                                             </th>
                                             <th scope="col" className="px-6 py-3">
-                                                NIS
-                                            </th>
-                                            <th scope="col" className="px-6 py-3">
-                                                Predikat
+                                                Jumlah Guru
                                             </th>
                                             <th scope="col" className="px-6 py-3">
                                                 Aksi
@@ -43,51 +75,28 @@ const mengelolaMataPelajaranPage = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                                                Murid A
-                                            </th>
-                                            <td className="px-6 py-4">
-                                                121212
-                                            </td>
-                                            <td className="px-6 py-4">
-                                                A
-                                            </td>
-                                            <td className="px-6 py-4 flex">
-                                                <a href="#" className="font-medium text-black bg-keempat py-2 px-5 rounded-2xl mr-2">Edit Rapor</a>
-                                                <a href="#" className="font-medium text-black bg-keempat py-2 px-5 rounded-2xl">Print Rapor</a>
-                                            </td>
-                                        </tr>
-                                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                                                Murid A
-                                            </th>
-                                            <td className="px-6 py-4">
-                                                121212
-                                            </td>
-                                            <td className="px-6 py-4">
-                                                A
-                                            </td>
-                                            <td className="px-6 py-4 flex">
-                                                <a href="#" className="font-medium text-black bg-keempat py-2 px-5 rounded-2xl mr-2">Edit Rapor</a>
-                                                <a href="#" className="font-medium text-black bg-keempat py-2 px-5 rounded-2xl">Print Rapor</a>
-                                            </td>
-                                        </tr>
-                                        <tr className="bg-white dark:bg-gray-800">
-                                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                                                Murid A
-                                            </th>
-                                            <td className="px-6 py-4">
-                                                121212
-                                            </td>
-                                            <td className="px-6 py-4">
-                                                A
-                                            </td>
-                                            <td className="px-6 py-4 flex">
-                                                <a href="#" className="font-medium text-black bg-keempat py-2 px-5 rounded-2xl mr-2">Edit Rapor</a>
-                                                <a href="#" className="font-medium text-black bg-keempat py-2 px-5 rounded-2xl">Print Rapor</a>
-                                            </td>
-                                        </tr>
+                                        {
+                                            data.filter(x => x.enable_flag == "Y").map((x) => (
+                                                <>
+                                                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                                                            {x.nama_mata_pelajaran}
+                                                        </th>
+                                                        <td className="px-6 py-4">
+                                                            1
+                                                        </td>
+                                                        <td className="px-6 py-4 flex">
+                                                            <Link href={'/mengelolaMataPelajaran/' + x.id}>
+                                                                <a className="font-medium text-black bg-keempat py-2 px-5 rounded-2xl mr-2">Edit Matpel</a>
+                                                            </Link>
+                                                            <a
+                                                                onClick={() => handleDelete(x.id)}
+                                                                className="font-medium text-white bg-ketiga py-2 px-5 rounded-2xl">Hapus</a>
+                                                        </td>
+                                                    </tr>
+                                                </>
+                                            ))
+                                        }
                                     </tbody>
                                 </table>
                             </div>
@@ -101,4 +110,4 @@ const mengelolaMataPelajaranPage = () => {
     );
 }
 
-export default mengelolaMataPelajaranPage;
+export default MengelolaMataPelajaranPage;

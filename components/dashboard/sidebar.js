@@ -2,14 +2,18 @@ import { React, useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from 'next/router'
 import Image from 'next/image'
+import { getId, getLevel } from "../../pages/utils/common";
+
 // import { LinkProps } from "next/link";
 const Sidebar = () => {
     const [collapseShow, setCollapseShow] = useState("hidden");
     const [activeTab, setActiveTab] = useState();
     const [url, setUrl] = useState();
     const router = useRouter()
+    const [level, setLevel] = useState("");
 
     useEffect(() => {
+        setLevel(getLevel())
         // window.location.href.indexOf("/admin/detail-volunteer-admin") !== -1 ? setActiveTab("pengolahan-rapor") : null;
         // window.location.href.indexOf("/pengolahan-rapor") !== -1 ? setActiveTab("pengolahan-rapor") : null;
         router.pathname.includes("/pengolahanRapor") ? setActiveTab("pengolahanRapor") : null;
@@ -108,144 +112,224 @@ const Sidebar = () => {
                                     </div>
                                 </Link>
                             </li>
-                            <li className="items-center">
-                                <Link
-                                    href="/pengolahanRapor"
-                                // onClick={handleTab2}
-                                >
-                                    <div className={
-                                        "text-base px-5 py-5 font-bold block " +
-                                        (activeTab == "pengolahanRapor"
-                                            ? "text-ketiga hover:text-utama bg-kedua "
-                                            : "text-gray-700 hover:text-utama")
-                                    }>
-                                        <i
-                                            className={
-                                                "fas fa-user-friends mr-4 text-2xl " +
+                            {level == 2 ? (
+                                <>
+                                    <li className="items-center">
+                                        <Link
+                                            href="/pengolahanRapor"
+                                        // onClick={handleTab2}
+                                        >
+                                            <div className={
+                                                "text-base px-5 py-5 font-bold block " +
                                                 (activeTab == "pengolahanRapor"
-                                                    ? "opacity-75"
-                                                    : "text-utama")
-                                            }
-                                        ></i>
-                                        Pengolahan Rapor
-                                    </div>
-                                </Link>
-                            </li>
-                            <li className="items-center">
-                                <Link
-                                    href="/pengolahanNilai"
-                                // onClick={handleTab2}
-                                >
-                                    <div className={
-                                        "text-base px-5 py-5 font-bold block " +
-                                        (activeTab == "pengolahanNilai"
-                                            ? "text-ketiga hover:text-utama bg-kedua "
-                                            : "text-gray-700 hover:text-utama")
-                                    }>
-                                        <i
-                                            className={
-                                                "fas fa-file mr-6 text-2xl " +
+                                                    ? "text-ketiga hover:text-utama bg-kedua "
+                                                    : "text-gray-700 hover:text-utama")
+                                            }>
+                                                <i
+                                                    className={
+                                                        "fas fa-user-friends mr-4 text-2xl " +
+                                                        (activeTab == "pengolahanRapor"
+                                                            ? "opacity-75"
+                                                            : "text-utama")
+                                                    }
+                                                ></i>
+                                                Pengolahan Rapor
+                                            </div>
+                                        </Link>
+                                    </li>
+                                    <li className="items-center">
+                                        <Link
+                                            href="/pengolahanNilai"
+                                        // onClick={handleTab2}
+                                        >
+                                            <div className={
+                                                "text-base px-5 py-5 font-bold block " +
                                                 (activeTab == "pengolahanNilai"
-                                                    ? "opacity-75"
-                                                    : "text-utama")
-                                            }
-                                        ></i>
-                                        Pengolahan Nilai
-                                    </div>
-                                </Link>
-                            </li>
-                            <li className="items-center">
-                                <Link
-                                    href="/mengelolaGuru"
-                                // onClick={handleTab2}
-                                >
-                                    <div className={
-                                        "text-base px-5 py-5 font-bold block " +
-                                        (activeTab == "mengelolaGuru"
-                                            ? "text-ketiga hover:text-utama bg-kedua "
-                                            : "text-gray-700 hover:text-utama")
-                                    }>
-                                        <i
-                                            className={
-                                                "fas fa-user-friends mr-4 text-2xl " +
+                                                    ? "text-ketiga hover:text-utama bg-kedua "
+                                                    : "text-gray-700 hover:text-utama")
+                                            }>
+                                                <i
+                                                    className={
+                                                        "fas fa-file mr-6 text-2xl " +
+                                                        (activeTab == "pengolahanNilai"
+                                                            ? "opacity-75"
+                                                            : "text-utama")
+                                                    }
+                                                ></i>
+                                                Pengolahan Nilai
+                                            </div>
+                                        </Link>
+                                    </li>
+                                </>
+                            ) : level == 3 ? (
+                                <>
+                                    <li className="items-center">
+                                        <Link
+                                            href="/pengolahanNilai"
+                                        // onClick={handleTab2}
+                                        >
+                                            <div className={
+                                                "text-base px-5 py-5 font-bold block " +
+                                                (activeTab == "pengolahanNilai"
+                                                    ? "text-ketiga hover:text-utama bg-kedua "
+                                                    : "text-gray-700 hover:text-utama")
+                                            }>
+                                                <i
+                                                    className={
+                                                        "fas fa-file mr-6 text-2xl " +
+                                                        (activeTab == "pengolahanNilai"
+                                                            ? "opacity-75"
+                                                            : "text-utama")
+                                                    }
+                                                ></i>
+                                                Pengolahan Nilai
+                                            </div>
+                                        </Link>
+                                    </li>
+                                </>
+                            ) : (
+                                <>
+                                    <li className="items-center">
+                                        <Link
+                                            href="/pengolahanRapor"
+                                        // onClick={handleTab2}
+                                        >
+                                            <div className={
+                                                "text-base px-5 py-5 font-bold block " +
+                                                (activeTab == "pengolahanRapor"
+                                                    ? "text-ketiga hover:text-utama bg-kedua "
+                                                    : "text-gray-700 hover:text-utama")
+                                            }>
+                                                <i
+                                                    className={
+                                                        "fas fa-user-friends mr-4 text-2xl " +
+                                                        (activeTab == "pengolahanRapor"
+                                                            ? "opacity-75"
+                                                            : "text-utama")
+                                                    }
+                                                ></i>
+                                                Pengolahan Rapor
+                                            </div>
+                                        </Link>
+                                    </li>
+                                    <li className="items-center">
+                                        <Link
+                                            href="/pengolahanNilai"
+                                        // onClick={handleTab2}
+                                        >
+                                            <div className={
+                                                "text-base px-5 py-5 font-bold block " +
+                                                (activeTab == "pengolahanNilai"
+                                                    ? "text-ketiga hover:text-utama bg-kedua "
+                                                    : "text-gray-700 hover:text-utama")
+                                            }>
+                                                <i
+                                                    className={
+                                                        "fas fa-file mr-6 text-2xl " +
+                                                        (activeTab == "pengolahanNilai"
+                                                            ? "opacity-75"
+                                                            : "text-utama")
+                                                    }
+                                                ></i>
+                                                Pengolahan Nilai
+                                            </div>
+                                        </Link>
+                                    </li>
+                                    <li className="items-center">
+                                        <Link
+                                            href="/mengelolaGuru"
+                                        // onClick={handleTab2}
+                                        >
+                                            <div className={
+                                                "text-base px-5 py-5 font-bold block " +
                                                 (activeTab == "mengelolaGuru"
-                                                    ? "opacity-75"
-                                                    : "text-utama")
-                                            }
-                                        ></i>
-                                        Mengelola Guru
-                                    </div>
-                                </Link>
-                            </li>
-                            <li className="items-center">
-                                <Link
-                                    href="/mengelolaSiswa"
-                                // onClick={handleTab2}
-                                >
-                                    <div className={
-                                        "text-base px-5 py-5 font-bold block " +
-                                        (activeTab == "mengelolaSiswa"
-                                            ? "text-ketiga hover:text-utama bg-kedua "
-                                            : "text-gray-700 hover:text-utama")
-                                    }>
-                                        <i
-                                            className={
-                                                "fas fa-user-friends mr-4 text-2xl " +
+                                                    ? "text-ketiga hover:text-utama bg-kedua "
+                                                    : "text-gray-700 hover:text-utama")
+                                            }>
+                                                <i
+                                                    className={
+                                                        "fas fa-user-friends mr-4 text-2xl " +
+                                                        (activeTab == "mengelolaGuru"
+                                                            ? "opacity-75"
+                                                            : "text-utama")
+                                                    }
+                                                ></i>
+                                                Mengelola Guru
+                                            </div>
+                                        </Link>
+                                    </li>
+                                    <li className="items-center">
+                                        <Link
+                                            href="/mengelolaSiswa"
+                                        // onClick={handleTab2}
+                                        >
+                                            <div className={
+                                                "text-base px-5 py-5 font-bold block " +
                                                 (activeTab == "mengelolaSiswa"
-                                                    ? "opacity-75"
-                                                    : "text-utama")
-                                            }
-                                        ></i>
-                                        Mengelola Siswa
-                                    </div>
-                                </Link>
-                            </li>
-                            <li className="items-center">
-                                <Link
-                                    href="/mengelolaMataPelajaran"
-                                // onClick={handleTab2}
-                                >
-                                    <div className={
-                                        "text-base px-5 py-5 font-bold block " +
-                                        (activeTab == "mengelolaMataPelajaran"
-                                            ? "text-ketiga hover:text-utama bg-kedua "
-                                            : "text-gray-700 hover:text-utama")
-                                    }>
-                                        <i
-                                            className={
-                                                "fas fa-file mr-6 text-2xl " +
+                                                    ? "text-ketiga hover:text-utama bg-kedua "
+                                                    : "text-gray-700 hover:text-utama")
+                                            }>
+                                                <i
+                                                    className={
+                                                        "fas fa-user-friends mr-4 text-2xl " +
+                                                        (activeTab == "mengelolaSiswa"
+                                                            ? "opacity-75"
+                                                            : "text-utama")
+                                                    }
+                                                ></i>
+                                                Mengelola Siswa
+                                            </div>
+                                        </Link>
+                                    </li>
+                                    <li className="items-center">
+                                        <Link
+                                            href="/mengelolaMataPelajaran"
+                                        // onClick={handleTab2}
+                                        >
+                                            <div className={
+                                                "text-base px-5 py-5 font-bold block " +
                                                 (activeTab == "mengelolaMataPelajaran"
-                                                    ? "opacity-75"
-                                                    : "text-utama")
-                                            }
-                                        ></i>
-                                        Mengelola Mata Pelajaran
-                                    </div>
-                                </Link>
-                            </li>
-                            <li className="items-center">
-                                <Link
-                                    href="/mengelolaEkskul"
-                                // onClick={handleTab2}
-                                >
-                                    <div className={
-                                        "text-base px-5 py-5 font-bold block " +
-                                        (activeTab == "mengelolaEkskul"
-                                            ? "text-ketiga hover:text-utama bg-kedua "
-                                            : "text-gray-700 hover:text-utama")
-                                    }>
-                                        <i
-                                            className={
-                                                "fas fa-file mr-6 text-2xl " +
+                                                    ? "text-ketiga hover:text-utama bg-kedua "
+                                                    : "text-gray-700 hover:text-utama")
+                                            }>
+                                                <i
+                                                    className={
+                                                        "fas fa-file mr-6 text-2xl " +
+                                                        (activeTab == "mengelolaMataPelajaran"
+                                                            ? "opacity-75"
+                                                            : "text-utama")
+                                                    }
+                                                ></i>
+                                                Mengelola Mata Pelajaran
+                                            </div>
+                                        </Link>
+                                    </li>
+                                    <li className="items-center">
+                                        <Link
+                                            href="/mengelolaEkskul"
+                                        // onClick={handleTab2}
+                                        >
+                                            <div className={
+                                                "text-base px-5 py-5 font-bold block " +
                                                 (activeTab == "mengelolaEkskul"
-                                                    ? "opacity-75"
-                                                    : "text-utama")
-                                            }
-                                        ></i>
-                                        Mengelola Ekskul
-                                    </div>
-                                </Link>
-                            </li>
+                                                    ? "text-ketiga hover:text-utama bg-kedua "
+                                                    : "text-gray-700 hover:text-utama")
+                                            }>
+                                                <i
+                                                    className={
+                                                        "fas fa-file mr-6 text-2xl " +
+                                                        (activeTab == "mengelolaEkskul"
+                                                            ? "opacity-75"
+                                                            : "text-utama")
+                                                    }
+                                                ></i>
+                                                Mengelola Ekskul
+                                            </div>
+                                        </Link>
+                                    </li>
+                                </>
+                            )}
+
                         </ul>
                     </div>
                 </div>

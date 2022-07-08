@@ -1,4 +1,25 @@
-const pengolahanNilaiPage = () => {
+import { useEffect, useState } from "react";
+import { getId, getLevel } from "../../pages/utils/common";
+import axios from "axios";
+import Link from 'next/link'
+const PengolahanNilaiPage = () => {
+    const [Loading, setLoading] = useState(true);
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        axios
+            .get(`https://methodist-app.vercel.app/siswa/index/`)
+            .then((res) => {
+                // alert("masuk");
+                setLoading(true);
+                // console.log(res.data.data)
+                setData(res.data.data.user)
+                setLoading(false);
+            })
+            .catch((err) => {
+                alert("Akun Tidak Ditemukan");
+            });
+    }, [data]);
     return (
         <>
             <div className="flex flex-wrap">
@@ -10,6 +31,14 @@ const pengolahanNilaiPage = () => {
                                 <div className="text-5xl font-semibold text-white mb-3">Pengolahan Nilai</div>
                                 <div className="flex items-center mb-3">
                                     <div className="text-3xl font-semibold text-white">Pilih Kelas :</div>
+                                    <select className="px-9 py-2 rounded-xl ml-3 text-2xl font-semibold">
+                                        <option>Kelas A</option>
+                                        <option>Kelas A</option>
+                                        <option>Kelas A</option>
+                                    </select>
+                                </div>
+                                <div className="flex items-center mb-3">
+                                    <div className="text-3xl font-semibold text-white">Pilih Mata Pelajaran :</div>
                                     <select className="px-9 py-2 rounded-xl ml-3 text-2xl font-semibold">
                                         <option>Kelas A</option>
                                         <option>Kelas A</option>
@@ -37,56 +66,31 @@ const pengolahanNilaiPage = () => {
                                                 NIS
                                             </th>
                                             <th scope="col" className="px-6 py-3">
-                                                Predikat
-                                            </th>
-                                            <th scope="col" className="px-6 py-3">
                                                 Aksi
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                                                Murid A
-                                            </th>
-                                            <td className="px-6 py-4">
-                                                121212
-                                            </td>
-                                            <td className="px-6 py-4">
-                                                A
-                                            </td>
-                                            <td className="px-6 py-4 flex">
-                                                <a href="#" className="font-medium text-black bg-keempat py-2 px-5 rounded-2xl mr-2">Edit Nilai</a>
-                                            </td>
-                                        </tr>
-                                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                                                Murid A
-                                            </th>
-                                            <td className="px-6 py-4">
-                                                121212
-                                            </td>
-                                            <td className="px-6 py-4">
-                                                A
-                                            </td>
-                                            <td className="px-6 py-4 flex">
-                                                <a href="#" className="font-medium text-black bg-keempat py-2 px-5 rounded-2xl mr-2">Edit Nilai</a>
-                                            </td>
-                                        </tr>
-                                        <tr className="bg-white dark:bg-gray-800">
-                                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                                                Murid A
-                                            </th>
-                                            <td className="px-6 py-4">
-                                                121212
-                                            </td>
-                                            <td className="px-6 py-4">
-                                                A
-                                            </td>
-                                            <td className="px-6 py-4 flex">
-                                                <a href="#" className="font-medium text-black bg-keempat py-2 px-5 rounded-2xl mr-2">Edit Nilai</a>
-                                            </td>
-                                        </tr>
+                                        {
+                                            data.map((x) => (
+                                                <>
+                                                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                                                            {x.nama_siswa}
+                                                        </th>
+                                                        <td className="px-6 py-4">
+                                                            {x.nis}
+                                                        </td>
+                                                        <td className="px-6 py-4 flex">
+                                                            <Link href={'/pengolahanRapor/' + x.id}>
+                                                                <a className="font-medium text-black bg-keempat py-2 px-5 rounded-2xl mr-2">Edit Rapor</a>
+                                                            </Link>
+                                                            <a className="font-medium text-black bg-keempat py-2 px-5 rounded-2xl">Print Rapor</a>
+                                                        </td>
+                                                    </tr>
+                                                </>
+                                            ))
+                                        }
                                     </tbody>
                                 </table>
                             </div>
@@ -100,4 +104,4 @@ const pengolahanNilaiPage = () => {
     );
 }
 
-export default pengolahanNilaiPage;
+export default PengolahanNilaiPage;
