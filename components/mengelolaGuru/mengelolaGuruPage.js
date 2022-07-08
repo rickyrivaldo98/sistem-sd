@@ -20,6 +20,17 @@ const MengelolaGuruPage = () => {
                 alert("Akun Tidak Ditemukan");
             });
     }, [data]);
+    const handleDelete = (e) => {
+        // e.preventDefault();
+        axios
+            .post(`https://methodist-app.vercel.app/guru/delete/${e}`)
+            .then((res) => {
+                alert("Guru Sudah Di Hapus");
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
     return (
         <>
             <div className="flex flex-wrap">
@@ -55,6 +66,9 @@ const MengelolaGuruPage = () => {
                                                 Nama Guru
                                             </th>
                                             <th scope="col" className="px-6 py-3">
+                                                Username
+                                            </th>
+                                            <th scope="col" className="px-6 py-3">
                                                 Password
                                             </th>
                                             <th scope="col" className="px-6 py-3">
@@ -64,20 +78,23 @@ const MengelolaGuruPage = () => {
                                     </thead>
                                     <tbody>
                                         {
-                                            data.map((x) => (
+                                            data.filter(x => x.enable_flag == "Y").map((x) => (
                                                 <>
                                                     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                                         <th scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
                                                             {x.nama_guru}
                                                         </th>
                                                         <td className="px-6 py-4">
+                                                            {x.username}
+                                                        </td>
+                                                        <td className="px-6 py-4">
                                                             {x.password}
                                                         </td>
                                                         <td className="px-6 py-4 flex">
-                                                            <Link href={'/pengolahanRapor/' + x.id}>
+                                                            <Link href={'/mengelolaGuru/' + x.id}>
                                                                 <a className="font-medium text-black bg-keempat py-2 px-5 rounded-2xl mr-2">Edit Detail</a>
                                                             </Link>
-                                                            <a className="font-medium text-white bg-ketiga py-2 px-5 rounded-2xl">Hapus</a>
+                                                            <a onClick={() => handleDelete(x.id)} className="font-medium text-white bg-ketiga py-2 px-5 rounded-2xl">Hapus</a>
                                                         </td>
                                                     </tr>
                                                 </>
@@ -88,8 +105,6 @@ const MengelolaGuruPage = () => {
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </>

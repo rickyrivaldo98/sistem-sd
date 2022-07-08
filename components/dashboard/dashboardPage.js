@@ -52,9 +52,7 @@ const DashboardPage = () => {
         axios
             .get(`https://methodist-app.vercel.app/kelas/show-guru/${getId()}`)
             .then((res) => {
-                // alert("masuk");
                 setLoading(true);
-                // console.log(res.data.data)
                 setKelasGuru(res.data.data.user)
                 setLoading(false);
             })

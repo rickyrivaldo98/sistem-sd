@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import { getId, getLevel } from "../../../pages/utils/common";
+import { getId, getLevel } from "../../pages/utils/common";
 import axios from "axios";
 import Link from 'next/link'
-import { Layout } from "../../../components/layout";
-import styles from '../../../styles/login.module.scss'
+import { useRouter } from 'next/router'
+import { Layout } from "../../components/layout";
+import styles from '../../styles/login.module.scss'
 import Router, { withRouter } from 'next/router'
 
-const TambahSiswaPage = () => {
+const MengelolaGuruDetail = () => {
     const [data, setData] = useState([]);
     const [Loading, setLoading] = useState(true);
     const [dataRapot, setDataRapot] = useState([]);
@@ -15,6 +16,8 @@ const TambahSiswaPage = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [mataPelajaran, setMataPelajaran] = useState("");
+    const [lvlAkses, setLvlAkses] = useState("");
+
     const [listKelas, setListKelas] = useState([]);
     const [listMataPelajaran, setListMataPelajaran] = useState([]);
 
@@ -23,34 +26,54 @@ const TambahSiswaPage = () => {
     const handleChange3 = (e) => setPassword(e.target.value);
     const handleChange4 = (e) => setMataPelajaran(e.currentTarget.value);
     const handleChange5 = (e) => setWaliKelas(e);
-
+    const router = useRouter()
+    const { id } = router.query
     useEffect(() => {
-        axios
-            .get(`https://methodist-app.vercel.app/kelas/index`)
-            .then((res) => {
-                // alert("masuk");
-                setLoading(true);
-                // console.log(res.data.data)
-                setListKelas(res.data.data.user)
-                setLoading(false);
-            })
-            .catch((err) => {
-                console.log(err)
-            });
-        axios
-            .get(`https://methodist-app.vercel.app/mata-pelajaran/index`)
-            .then((res) => {
-                // alert("masuk");
-                setLoading(true);
-                // console.log(res.data.data)
-                setListMataPelajaran(res.data.data.user)
-                setLoading(false);
-            })
-            .catch((err) => {
-                console.log(err)
-            });
+        if (router.isReady) {
+            axios
+                .get(`https://methodist-app.vercel.app/guru/show/${id}`)
+                .then((res) => {
+                    setLoading(true);
+                    setNama(res.data.data.user.nama_guru)
+                    setUsername(res.data.data.user.username)
+                    setPassword(res.data.data.user.password)
+                    setLvlAkses(res.data.data.user.lvl_akses)
+                    // setMataPelajaran(res.data.data.user.nama_mata_pelajaran)
+                    // setWaliKelas()
+                    setLoading(false);
+                })
+                .catch((err) => {
+                    console.log(err)
+                });
+            axios
+                .get(`https://methodist-app.vercel.app/kelas/index`)
+                .then((res) => {
+                    // alert("masuk");
+                    setLoading(true);
+                    // console.log(res.data.data)
+                    setListKelas(res.data.data.user)
+                    setLoading(false);
+                })
+                .catch((err) => {
+                    console.log(err)
+                });
+            axios
+                .get(`https://methodist-app.vercel.app/mata-pelajaran/index`)
+                .then((res) => {
+                    // alert("masuk");
+                    setLoading(true);
+                    // console.log(res.data.data)
+                    setListMataPelajaran(res.data.data.user)
+                    setLoading(false);
+                })
+                .catch((err) => {
+                    console.log(err)
+                });
 
-    }, []);
+        } else {
+
+        }
+    }, [router.isReady,]);
 
 
     const handleSubmit = (e) => {
@@ -62,6 +85,8 @@ const TambahSiswaPage = () => {
         bodyFormData.append('password', password);
         if (waliKelas === 3) {
             bodyFormData.append('lvl_akses', waliKelas);
+        } else if (waliKelas == '') {
+            bodyFormData.append('lvl_akses', lvlAkses);
         } else {
             bodyFormData.append('lvl_akses', 2);
         }
@@ -72,9 +97,9 @@ const TambahSiswaPage = () => {
         bodyFormData.append('alamat', "johor");
 
         axios
-            .post(`https://methodist-app.vercel.app/guru/store`, bodyFormData)
+            .post(`https://methodist-app.vercel.app/guru/update/${id}`, bodyFormData)
             .then((res) => {
-                alert("Guru Berhasil Ditambahkan");
+                alert("Guru Berhasil DIedit");
                 setTimeout(() => {
                     Router.push({
                         pathname: '/mengelolaGuru'
@@ -108,6 +133,7 @@ const TambahSiswaPage = () => {
                                                     className={`shadow-sm border-gray-300 rounded-lg py-3 px-4 w-full  mb-10 focus: ring-2 focus:ring-indigo-200 focus:border-indigo-400`}
                                                     placeholder="Silahkan Input nilai"
                                                     onChange={handleChange1}
+                                                    value={nama}
                                                 />
                                             </div>
                                             <div className="w-60 mr-10">
@@ -116,6 +142,7 @@ const TambahSiswaPage = () => {
                                                     className={`shadow-sm border-gray-300 rounded-lg py-3 px-4 w-full  mb-10 focus: ring-2 focus:ring-indigo-200 focus:border-indigo-400`}
                                                     placeholder="Silahkan masukkan Username"
                                                     onChange={handleChange2}
+                                                    value={username}
                                                 />
                                             </div>
                                             <div className="w-60 mr-10">
@@ -124,9 +151,9 @@ const TambahSiswaPage = () => {
                                                     className={`shadow-sm border-gray-300 rounded-lg py-3 px-4 w-full  mb-10 focus: ring-2 focus:ring-indigo-200 focus:border-indigo-400`}
                                                     placeholder="Silahkan masukkan nilai"
                                                     onChange={handleChange3}
+                                                    value={password}
                                                 />
                                             </div>
-
                                         </div>
                                     </div>
                                     <div className="mb-10">
@@ -173,5 +200,5 @@ const TambahSiswaPage = () => {
         </div>
     )
 }
-TambahSiswaPage.getLayout = Layout;
-export default TambahSiswaPage
+MengelolaGuruDetail.getLayout = Layout;
+export default MengelolaGuruDetail

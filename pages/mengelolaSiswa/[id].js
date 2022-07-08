@@ -1,19 +1,17 @@
 import { useEffect, useState } from "react";
-import { getId, getLevel } from "../../../pages/utils/common";
+import { getId, getLevel } from "../../pages/utils/common";
 import axios from "axios";
 import Link from 'next/link'
-import { Layout } from "../../../components/layout";
-import styles from '../../../styles/login.module.scss'
+import { useRouter } from 'next/router'
+import { Layout } from "../../components/layout";
+import styles from '../../styles/login.module.scss'
 import Router, { withRouter } from 'next/router'
-const TambahSiswaPage = () => {
-    const [data, setData] = useState([]);
+
+const MengelolaSiswaDetail = () => {
     const [Loading, setLoading] = useState(true);
-    const [dataRapot, setDataRapot] = useState([]);
     const [listKelas, setListKelas] = useState([]);
     const [listTahunPelajaran, setListTahunPelajaran] = useState([]);
     const [listEkstrakulikuler, setListEkstrakuliker] = useState([]);
-
-
 
     const [nama, setNama] = useState();
     const [ttl, setTtl] = useState("");
@@ -31,45 +29,64 @@ const TambahSiswaPage = () => {
     const handleChange6 = (e) => setSemester(e);
     const handleChange7 = (e) => setEkstrakulikuler(e.currentTarget.value);
 
-
+    const router = useRouter()
+    const { id } = router.query
     useEffect(() => {
-        axios
-            .get(`https://methodist-app.vercel.app/kelas/index`)
-            .then((res) => {
-                // alert("masuk");
-                setLoading(true);
-                // console.log(res.data.data)
-                setListKelas(res.data.data.user)
-                setLoading(false);
-            })
-            .catch((err) => {
-                console.log(err)
-            });
-        axios
-            .get(`https://methodist-app.vercel.app/tahun-ajaran/index`)
-            .then((res) => {
-                // alert("masuk");
-                setLoading(true);
-                // console.log(res.data.data)
-                setListTahunPelajaran(res.data.data.user)
-                setLoading(false);
-            })
-            .catch((err) => {
-                console.log(err)
-            });
-        axios
-            .get(`https://methodist-app.vercel.app/ekstra-kulikuler/index`)
-            .then((res) => {
-                // alert("masuk");
-                setLoading(true);
-                // console.log(res.data.data)
-                setListEkstrakuliker(res.data.data.user)
-                setLoading(false);
-            })
-            .catch((err) => {
-                console.log(err)
-            });
-    }, []);
+        if (router.isReady) {
+            axios
+                .get(`https://methodist-app.vercel.app/siswa/show/${id}`)
+                .then((res) => {
+                    setLoading(true);
+                    setNama(res.data.data.user.nama_siswa)
+                    setTtl(res.data.data.user.tgl_lahir)
+                    setNis(res.data.data.user.nis)
+                    setKelas(res.data.data.user.kelas_id)
+                    setLoading(false);
+                })
+                .catch((err) => {
+                    console.log(err)
+                });
+            axios
+                .get(`https://methodist-app.vercel.app/kelas/index`)
+                .then((res) => {
+                    // alert("masuk");
+                    setLoading(true);
+                    // console.log(res.data.data)
+                    setListKelas(res.data.data.user)
+                    setLoading(false);
+                })
+                .catch((err) => {
+                    console.log(err)
+                });
+            axios
+                .get(`https://methodist-app.vercel.app/tahun-ajaran/index`)
+                .then((res) => {
+                    // alert("masuk");
+                    setLoading(true);
+                    // console.log(res.data.data)
+                    setListTahunPelajaran(res.data.data.user)
+                    setLoading(false);
+                })
+                .catch((err) => {
+                    console.log(err)
+                });
+            axios
+                .get(`https://methodist-app.vercel.app/ekstra-kulikuler/index`)
+                .then((res) => {
+                    // alert("masuk");
+                    setLoading(true);
+                    // console.log(res.data.data)
+                    setListEkstrakuliker(res.data.data.user)
+                    setLoading(false);
+                })
+                .catch((err) => {
+                    console.log(err)
+                });
+
+        } else {
+
+        }
+    }, [router.isReady,]);
 
 
     const handleSubmit = (e) => {
@@ -82,9 +99,9 @@ const TambahSiswaPage = () => {
         console.log("ekskul" + ekstrakulikuler)
 
         axios
-            .post(`https://methodist-app.vercel.app/siswa/store?nis=${nis}&nama_siswa=${nama}&nisn=${nis}&kelas_id=${kelas}&enable_flag=Y&jns_kelamin=Perempuan&tempat_lahir=Medan&tgl_lahir=27/04/1999&alamat=medan`)
+            .post(`https://methodist-app.vercel.app/siswa/update/${id}?nis=${nis}&nama_siswa=${nama}&nisn=${nis}&kelas_id=${kelas}`)
             .then((res) => {
-                alert("Siswa Berhasil Ditambahkan");
+                alert("Siswa Berhasil diEdit");
                 setTimeout(() => {
                     Router.push({
                         pathname: '/mengelolaSiswa'
@@ -102,7 +119,7 @@ const TambahSiswaPage = () => {
                     <div className="flex items-center">
                         <img src="/images/mengelolaSiswa/gambar1.png" className="mr-8 mb-8" alt="logo" />
                         <div>
-                            <div className="text-4xl font-semibold text-white mb-3">Tambah Siswa Baru</div>
+                            <div className="text-4xl font-semibold text-white mb-3">Edit Siswa</div>
                         </div>
                     </div>
                     <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-2xl bg-white">
@@ -115,6 +132,7 @@ const TambahSiswaPage = () => {
                                             <div className="w-60 mr-10">
                                                 <div className="text-lg mb-2">Nama</div>
                                                 <input
+                                                    value={nama}
                                                     className={`shadow-sm border-gray-300 rounded-lg py-3 px-4 w-full  mb-10 focus: ring-2 focus:ring-indigo-200 focus:border-indigo-400`}
                                                     placeholder="Silahkan Input nilai"
                                                     onChange={handleChange1}
@@ -123,6 +141,7 @@ const TambahSiswaPage = () => {
                                             <div className="w-60 mr-10">
                                                 <div className="text-lg mb-2">Tanggal Lahir</div>
                                                 <input
+                                                    value={ttl}
                                                     className={`shadow-sm border-gray-300 rounded-lg py-3 px-4 w-full  mb-10 focus: ring-2 focus:ring-indigo-200 focus:border-indigo-400`}
                                                     placeholder="DD/MM/YYYY"
                                                     onChange={handleChange2}
@@ -131,6 +150,7 @@ const TambahSiswaPage = () => {
                                             <div className="w-60 mr-10">
                                                 <div className="text-lg mb-2">NIS</div>
                                                 <input
+                                                    value={nis}
                                                     className={`shadow-sm border-gray-300 rounded-lg py-3 px-4 w-full  mb-10 focus: ring-2 focus:ring-indigo-200 focus:border-indigo-400`}
                                                     placeholder="Silahkan masukkan nilai"
                                                     onChange={handleChange3}
@@ -191,5 +211,5 @@ const TambahSiswaPage = () => {
         </div>
     )
 }
-TambahSiswaPage.getLayout = Layout;
-export default TambahSiswaPage
+MengelolaSiswaDetail.getLayout = Layout;
+export default MengelolaSiswaDetail
