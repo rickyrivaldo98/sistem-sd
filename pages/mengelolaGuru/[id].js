@@ -83,18 +83,18 @@ const MengelolaGuruDetail = () => {
         bodyFormData.append('nama_guru', nama);
         bodyFormData.append('username', username);
         bodyFormData.append('password', password);
-        if (waliKelas === 3) {
+        if (waliKelas == 3) {
             bodyFormData.append('lvl_akses', waliKelas);
         } else if (waliKelas == '') {
             bodyFormData.append('lvl_akses', lvlAkses);
         } else {
             bodyFormData.append('lvl_akses', 2);
         }
-        bodyFormData.append('enable_flag', "Y");
-        bodyFormData.append('jns_kelamin', "Laki-Laki");
-        bodyFormData.append('tempat_lahir', "Medan");
-        bodyFormData.append('tgl_lahir', "27/04/1999");
-        bodyFormData.append('alamat', "johor");
+        // bodyFormData.append('enable_flag', "Y");
+        // bodyFormData.append('jns_kelamin', "Laki-Laki");
+        // bodyFormData.append('tempat_lahir', "Medan");
+        // bodyFormData.append('tgl_lahir', "27/04/1999");
+        // bodyFormData.append('alamat', "johor");
 
         axios
             .post(`https://methodist-app.vercel.app/guru/update/${id}`, bodyFormData)

@@ -113,7 +113,8 @@ const DashboardPage = () => {
                                 <img src="/images/dashboard/gambar1.png" className="mr-8" alt="logo" />
                                 <div className="">
                                     <h3 className="font-light text-lg ">Good Morning,</h3>
-                                    <h3 className="font-semibold text-3xl">
+                                    <h3 className="font-semibold text-2xl">
+
                                         {loading ? (
                                             <>
                                                 <div className="container loading">
@@ -129,17 +130,25 @@ const DashboardPage = () => {
 
                                         }
                                     </h3>
+                                    {console.log(matpelGuru > 0 ? "ada" : "kosong")}
                                     {loading ? (
                                         <></>
                                     ) : (
                                         level == 2 ? (
                                             <>
-                                                <h3 className="font-light text-lg ">Wali Kelas {kelasGuru.nama_kelas}</h3>
+                                                {console.log(matpelGuru.length)}
+                                                <h3 className="font-light text-lg ">Wali Kelas {kelasGuru.length > 0 ? kelasGuru[0].nama_kelas : "Belum Ada"}</h3>
+                                                {/* <h3 className="font-light text-lg ">Wali Kelas Kelas A</h3> */}
                                                 <h3 className="font-light text-lg ">Guru {
                                                     // JSON.stringify(matpelGuru)
-                                                    matpelGuru.map((x) => {
-                                                        return x.nama_mata_pelajaran
-                                                    })
+                                                    matpelGuru.length > 0 ?
+                                                        matpelGuru.filter(x => x.enable_flag == "Y").map((x) => {
+                                                            return (<>
+                                                                <div>{x.nama_mata_pelajaran} </div>
+                                                            </>)
+                                                        }) : (<>
+                                                            Belum Ada
+                                                        </>)
                                                 }</h3>
                                             </>
                                         ) : level == 3 ? (

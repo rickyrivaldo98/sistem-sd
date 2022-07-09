@@ -82,7 +82,7 @@ const PengolahanNilaiPage = () => {
                                                             {x.nis}
                                                         </td>
                                                         <td className="px-6 py-4 flex">
-                                                            <Link href={'/pengolahanRapor/' + x.id}>
+                                                            <Link href={'/pengolahanNilai/' + x.id}>
                                                                 <a className="font-medium text-black bg-keempat py-2 px-5 rounded-2xl mr-2">Edit Rapor</a>
                                                             </Link>
                                                             <a className="font-medium text-black bg-keempat py-2 px-5 rounded-2xl">Print Rapor</a>

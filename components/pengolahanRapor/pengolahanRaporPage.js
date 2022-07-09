@@ -13,10 +13,7 @@ const PengolahanRaporPage = () => {
 
 
     useEffect(() => {
-        // console.log(kelas)
-        if (level == 2) {
-            setKelas(kelasGuru.id)
-        }
+
         setLevel(getLevel())
         axios
             .get(`https://methodist-app.vercel.app/siswa/index/`)
@@ -54,6 +51,11 @@ const PengolahanRaporPage = () => {
             .catch((err) => {
                 alert("Akun Tidak Ditemukan");
             });
+        if (level == 2) {
+            kelasGuru.length > 0 ?
+                setKelas(kelasGuru[0].kd_kelas) : null
+        }
+        // { console.log(data) }
     }, [data]);
     const pilihKelas = (e) => {
         // e.preventDefault();
@@ -86,7 +88,8 @@ const PengolahanRaporPage = () => {
                                         </>
                                     ) : level == 2 ? (
                                         <>
-                                            <div className="flex items-center text-3xl font-semibold  text-white mb-3">{kelasGuru.nama_kelas}</div>
+                                            <div className="flex items-center text-3xl font-semibold  text-white mb-3">{kelasGuru.length > 0 ?
+                                                kelasGuru[0].nama_kelas : null}</div>
                                         </>
                                     ) : (
                                         <></>
@@ -130,6 +133,8 @@ const PengolahanRaporPage = () => {
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        {/* {console.log(kelasGuru.length > 0 ?
+                                            kelasGuru[0].id : null)} */}
                                         {
                                             kelas == "" ? (
                                                 <>
@@ -138,27 +143,28 @@ const PengolahanRaporPage = () => {
                                                     </tr>
                                                 </>
                                             ) : level == 2 ? (
-                                                data.filter(y => y.kelas_id == kelasGuru.id).map((x) => (
-                                                    <>
-                                                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                                                                {x.nama_siswa}
-                                                            </th>
-                                                            <td className="px-6 py-4">
-                                                                {x.nis}
-                                                            </td>
-                                                            <td className="px-6 py-4">
-                                                                A
-                                                            </td>
-                                                            <td className="px-6 py-4 flex">
-                                                                <Link href={'/pengolahanRapor/' + x.id}>
-                                                                    <a className="font-medium text-black bg-keempat py-2 px-5 rounded-2xl mr-2">Edit Rapor</a>
-                                                                </Link>
-                                                                <a className="font-medium text-black bg-keempat py-2 px-5 rounded-2xl">Print Rapor</a>
-                                                            </td>
-                                                        </tr>
-                                                    </>
-                                                ))
+                                                data.filter(y => y.kelas_id == kelasGuru.length > 0 ?
+                                                    kelasGuru[0].id : null).map((x) => (
+                                                        <>
+                                                            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                                                <th scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                                                                    {x.nama_siswa}
+                                                                </th>
+                                                                <td className="px-6 py-4">
+                                                                    {x.nis}
+                                                                </td>
+                                                                <td className="px-6 py-4">
+                                                                    A
+                                                                </td>
+                                                                <td className="px-6 py-4 flex">
+                                                                    <Link href={'/pengolahanRapor/' + x.id}>
+                                                                        <a className="font-medium text-black bg-keempat py-2 px-5 rounded-2xl mr-2">Edit Rapor</a>
+                                                                    </Link>
+                                                                    <a className="font-medium text-black bg-keempat py-2 px-5 rounded-2xl">Print Rapor</a>
+                                                                </td>
+                                                            </tr>
+                                                        </>
+                                                    ))
                                             ) :
                                                 data.filter(y => y.kelas_id == kelas).map((x) => (
                                                     <>

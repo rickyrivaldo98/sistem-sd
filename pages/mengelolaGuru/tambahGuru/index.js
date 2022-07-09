@@ -60,7 +60,7 @@ const TambahSiswaPage = () => {
         bodyFormData.append('nama_guru', nama);
         bodyFormData.append('username', username);
         bodyFormData.append('password', password);
-        if (waliKelas === 3) {
+        if (waliKelas == 3) {
             bodyFormData.append('lvl_akses', waliKelas);
         } else {
             bodyFormData.append('lvl_akses', 2);
