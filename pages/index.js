@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from '../styles/login.module.scss'
 import Image from 'next/image'
 import axios from "axios";
-import { setUserSession } from "./utils/common";
+import { setUserSession } from "../lib/common";
 import Router, { withRouter } from 'next/router'
 
 export default function Login() {

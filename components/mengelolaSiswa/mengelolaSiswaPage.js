@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getId, getLevel } from "../../pages/utils/common";
+import { getId, getLevel } from "../../lib/common";
 import axios from "axios";
 import Link from 'next/link'
 const MengelolaSiswaPage = () => {

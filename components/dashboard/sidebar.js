@@ -2,7 +2,7 @@ import { React, useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-import { getId, getLevel } from "../../pages/utils/common";
+import { getId, getLevel } from "../../lib/common";
 
 // import { LinkProps } from "next/link";
 const Sidebar = () => {
