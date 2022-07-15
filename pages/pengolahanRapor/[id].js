@@ -184,7 +184,7 @@ const PengolahanRaporPageDetail = () => {
                                                 <div className="text-lg mb-2">Sakit</div>
                                                 <input
                                                     className={`shadow-sm border-gray-300 rounded-lg py-3 px-4 w-full  mb-10 focus: ring-2 focus:ring-indigo-200 focus:border-indigo-400`}
-                                                    placeholder="Silahkan Input nilai"
+
                                                 // onChange={handleChange1}
                                                 />
                                             </div>
@@ -192,7 +192,7 @@ const PengolahanRaporPageDetail = () => {
                                                 <div className="text-lg mb-2">Izin</div>
                                                 <input
                                                     className={`shadow-sm border-gray-300 rounded-lg py-3 px-4 w-full  mb-10 focus: ring-2 focus:ring-indigo-200 focus:border-indigo-400`}
-                                                    placeholder="Silahkan masukkan nilai"
+
                                                 // onChange={handleChange1}
                                                 />
                                             </div>
@@ -200,7 +200,7 @@ const PengolahanRaporPageDetail = () => {
                                                 <div className="text-lg mb-2">Tanpa Alasan</div>
                                                 <input
                                                     className={`shadow-sm border-gray-300 rounded-lg py-3 px-4 w-full  mb-10 focus: ring-2 focus:ring-indigo-200 focus:border-indigo-400`}
-                                                    placeholder="Silahkan masukkan nilai"
+
                                                 // onChange={handleChange1}
                                                 />
                                             </div>
@@ -213,7 +213,7 @@ const PengolahanRaporPageDetail = () => {
                                                 <div className="text-lg mb-2">Sikap Spiritual</div>
                                                 <input
                                                     className={`shadow-sm border-gray-300 rounded-lg py-3 px-4 w-full  mb-10 focus: ring-2 focus:ring-indigo-200 focus:border-indigo-400`}
-                                                    placeholder="Silahkan masukkan nilai"
+
                                                 // onChange={handleChange1}
                                                 />
                                             </div>
@@ -221,7 +221,7 @@ const PengolahanRaporPageDetail = () => {
                                                 <div className="text-lg mb-2">Kerajinan</div>
                                                 <input
                                                     className={`shadow-sm border-gray-300 rounded-lg py-3 px-4 w-full  mb-10 focus: ring-2 focus:ring-indigo-200 focus:border-indigo-400`}
-                                                    placeholder="Silahkan masukkan nilai"
+
                                                 // onChange={handleChange1}
                                                 />
                                             </div>
@@ -229,7 +229,7 @@ const PengolahanRaporPageDetail = () => {
                                                 <div className="text-lg mb-2">Kebersihan</div>
                                                 <input
                                                     className={`shadow-sm border-gray-300 rounded-lg py-3 px-4 w-full  mb-10 focus: ring-2 focus:ring-indigo-200 focus:border-indigo-400`}
-                                                    placeholder="Silahkan masukkan nilai"
+
                                                 // onChange={handleChange1}
                                                 />
                                             </div>
@@ -239,7 +239,7 @@ const PengolahanRaporPageDetail = () => {
                                                 <div className="text-lg mb-2">Kerapian</div>
                                                 <input
                                                     className={`shadow-sm border-gray-300 rounded-lg py-3 px-4 w-full  mb-10 focus: ring-2 focus:ring-indigo-200 focus:border-indigo-400`}
-                                                    placeholder="Silahkan masukkan nilai"
+
                                                 // onChange={handleChange1}
                                                 />
                                             </div>
@@ -247,7 +247,7 @@ const PengolahanRaporPageDetail = () => {
                                                 <div className="text-lg mb-2">Catatan WaliKelas</div>
                                                 <textarea
                                                     className={`shadow-sm border-gray-300 rounded-lg py-3 px-4 w-full  mb-10 focus: ring-2 focus:ring-indigo-200 focus:border-indigo-400`}
-                                                    placeholder="Silahkan masukkan nilai"
+
                                                 // onChange={handleChange1}
                                                 />
                                             </div>
@@ -260,7 +260,7 @@ const PengolahanRaporPageDetail = () => {
                                                 <div className="text-lg mb-2">Melukis</div>
                                                 <input
                                                     className={`shadow-sm border-gray-300 rounded-lg py-3 px-4 w-full  mb-10 focus: ring-2 focus:ring-indigo-200 focus:border-indigo-400`}
-                                                    placeholder="Silahkan masukkan nilai"
+
                                                 // onChange={handleChange1}
                                                 />
                                             </div>

@@ -41,6 +41,8 @@ const MengelolaSiswaDetail = () => {
                     setTtl(res.data.data.user.tgl_lahir)
                     setNis(res.data.data.user.nis)
                     setKelas(res.data.data.user.kelas_id)
+                    setTahunPelajaran(res.data.data.user.tahun_ajar_id)
+                    setEkstrakulikuler(res.data.data.user.ekskul_id)
                     setLoading(false);
                 })
                 .catch((err) => {
@@ -145,6 +147,7 @@ const MengelolaSiswaDetail = () => {
                                                     className={`shadow-sm border-gray-300 rounded-lg py-3 px-4 w-full  mb-10 focus: ring-2 focus:ring-indigo-200 focus:border-indigo-400`}
                                                     placeholder="DD/MM/YYYY"
                                                     onChange={handleChange2}
+                                                    type="date"
                                                 />
                                             </div>
                                             <div className="w-60 mr-10">
@@ -189,9 +192,10 @@ const MengelolaSiswaDetail = () => {
                                         <div className="mb-10 w-1/2 flex flex-wrap">
                                             {
                                                 listEkstrakulikuler.map((x) => (
+
                                                     <>
                                                         <label className={styles.radioLabel}>
-                                                            <input onChange={handleChange7} className={styles.radioInput} type="radio" name="ekskul" value={x.id} /><span>{x.nama_ekskul}</span>
+                                                            <input onChange={handleChange7} className={styles.radioInput} checked={x.id == ekstrakulikuler} type="radio" name="ekskul" value={x.id} /><span>{x.nama_ekskul}</span>
                                                         </label>
                                                     </>
                                                 ))

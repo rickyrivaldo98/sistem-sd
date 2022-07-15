@@ -92,9 +92,10 @@ const Sidebar = () => {
                             <li className="items-center">
                                 <Link
                                     href="/dashboard"
+
                                 // onClick={handleTab1}
                                 >
-                                    <div
+                                    <div style={{ cursor: "pointer" }}
                                         className={
                                             "text-base px-5 py-5 font-bold block " +
                                             (activeTab === "dashboard"
@@ -118,7 +119,7 @@ const Sidebar = () => {
                                             href="/pengolahanRapor"
                                         // onClick={handleTab2}
                                         >
-                                            <div className={
+                                            <div style={{ cursor: "pointer" }} className={
                                                 "text-base px-5 py-5 font-bold block " +
                                                 (activeTab == "pengolahanRapor"
                                                     ? "text-ketiga hover:text-utama bg-kedua "
@@ -141,7 +142,7 @@ const Sidebar = () => {
                                             href="/pengolahanNilai"
                                         // onClick={handleTab2}
                                         >
-                                            <div className={
+                                            <div style={{ cursor: "pointer" }} className={
                                                 "text-base px-5 py-5 font-bold block " +
                                                 (activeTab == "pengolahanNilai"
                                                     ? "text-ketiga hover:text-utama bg-kedua "
@@ -167,7 +168,7 @@ const Sidebar = () => {
                                             href="/pengolahanNilai"
                                         // onClick={handleTab2}
                                         >
-                                            <div className={
+                                            <div style={{ cursor: "pointer" }} className={
                                                 "text-base px-5 py-5 font-bold block " +
                                                 (activeTab == "pengolahanNilai"
                                                     ? "text-ketiga hover:text-utama bg-kedua "
@@ -193,7 +194,7 @@ const Sidebar = () => {
                                             href="/pengolahanRapor"
                                         // onClick={handleTab2}
                                         >
-                                            <div className={
+                                            <div style={{ cursor: "pointer" }} className={
                                                 "text-base px-5 py-5 font-bold block " +
                                                 (activeTab == "pengolahanRapor"
                                                     ? "text-ketiga hover:text-utama bg-kedua "
@@ -216,7 +217,7 @@ const Sidebar = () => {
                                             href="/pengolahanNilai"
                                         // onClick={handleTab2}
                                         >
-                                            <div className={
+                                            <div style={{ cursor: "pointer" }} className={
                                                 "text-base px-5 py-5 font-bold block " +
                                                 (activeTab == "pengolahanNilai"
                                                     ? "text-ketiga hover:text-utama bg-kedua "
@@ -239,7 +240,7 @@ const Sidebar = () => {
                                             href="/mengelolaGuru"
                                         // onClick={handleTab2}
                                         >
-                                            <div className={
+                                            <div style={{ cursor: "pointer" }} className={
                                                 "text-base px-5 py-5 font-bold block " +
                                                 (activeTab == "mengelolaGuru"
                                                     ? "text-ketiga hover:text-utama bg-kedua "
@@ -262,7 +263,7 @@ const Sidebar = () => {
                                             href="/mengelolaSiswa"
                                         // onClick={handleTab2}
                                         >
-                                            <div className={
+                                            <div style={{ cursor: "pointer" }} className={
                                                 "text-base px-5 py-5 font-bold block " +
                                                 (activeTab == "mengelolaSiswa"
                                                     ? "text-ketiga hover:text-utama bg-kedua "
@@ -285,7 +286,7 @@ const Sidebar = () => {
                                             href="/mengelolaMataPelajaran"
                                         // onClick={handleTab2}
                                         >
-                                            <div className={
+                                            <div style={{ cursor: "pointer" }} className={
                                                 "text-base px-5 py-5 font-bold block " +
                                                 (activeTab == "mengelolaMataPelajaran"
                                                     ? "text-ketiga hover:text-utama bg-kedua "
@@ -308,7 +309,7 @@ const Sidebar = () => {
                                             href="/mengelolaEkskul"
                                         // onClick={handleTab2}
                                         >
-                                            <div className={
+                                            <div style={{ cursor: "pointer" }} className={
                                                 "text-base px-5 py-5 font-bold block " +
                                                 (activeTab == "mengelolaEkskul"
                                                     ? "text-ketiga hover:text-utama bg-kedua "

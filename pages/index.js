@@ -67,9 +67,10 @@ export default function Login() {
                 className={`${styles.input} focus: ring-2 focus:ring-indigo-200 focus:border-indigo-400`}
                 placeholder="Silahkan Input Password"
                 onChange={handleChange2}
+                type="password"
               />
               <div className='flex flex-col justify-center'>
-                <button className={styles.login}>Log in</button>
+                <button className={styles.login}>Login</button>
               </div>
             </div>
           </form>

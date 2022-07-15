@@ -67,6 +67,9 @@ const MengelolaMataPelajaranPage = () => {
                                                 Nama Mata Pelajaran
                                             </th>
                                             <th scope="col" className="px-6 py-3">
+                                                Kode Pelajaran
+                                            </th>
+                                            <th scope="col" className="px-6 py-3">
                                                 Jumlah Guru
                                             </th>
                                             <th scope="col" className="px-6 py-3">
@@ -82,6 +85,9 @@ const MengelolaMataPelajaranPage = () => {
                                                         <th scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
                                                             {x.nama_mata_pelajaran}
                                                         </th>
+                                                        <td className="px-6 py-4">
+                                                            {x.kd_mata_pelajaran}
+                                                        </td>
                                                         <td className="px-6 py-4">
                                                             1
                                                         </td>

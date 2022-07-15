@@ -11,7 +11,7 @@ const MengelolaGuruDetail = () => {
     const [data, setData] = useState([]);
     const [Loading, setLoading] = useState(true);
     const [dataRapot, setDataRapot] = useState([]);
-    const [waliKelas, setWaliKelas] = useState();
+    const [waliKelas, setWaliKelas] = useState(3);
     const [nama, setNama] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -38,8 +38,20 @@ const MengelolaGuruDetail = () => {
                     setUsername(res.data.data.user.username)
                     setPassword(res.data.data.user.password)
                     setLvlAkses(res.data.data.user.lvl_akses)
-                    // setMataPelajaran(res.data.data.user.nama_mata_pelajaran)
+                    setMataPelajaran(res.data.data.user.mata_pelajaran_id)
                     // setWaliKelas()
+                    setLoading(false);
+                })
+                .catch((err) => {
+                    console.log(err)
+                });
+
+            axios
+                .get(`https://methodist-app.vercel.app/kelas/show-guru/${id}`)
+                .then((res) => {
+                    setLoading(true);
+                    // setMataPelajaran(res.data.data.user.id)
+                    setWaliKelas(res.data.data.user[0].id)
                     setLoading(false);
                 })
                 .catch((err) => {
@@ -74,7 +86,7 @@ const MengelolaGuruDetail = () => {
 
         }
     }, [router.isReady,]);
-
+    console.log(waliKelas)
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -88,8 +100,10 @@ const MengelolaGuruDetail = () => {
         } else if (waliKelas == '') {
             bodyFormData.append('lvl_akses', lvlAkses);
         } else {
-            bodyFormData.append('kelas_id', 2);
+            bodyFormData.append('kelas_id', waliKelas);
         }
+        bodyFormData.append('mata_pelajaran_id', mataPelajaran);
+
         // bodyFormData.append('enable_flag', "Y");
         // bodyFormData.append('jns_kelamin', "Laki-Laki");
         // bodyFormData.append('tempat_lahir', "Medan");
@@ -117,7 +131,7 @@ const MengelolaGuruDetail = () => {
                     <div className="flex items-center">
                         <img src="/images/mengelolaSiswa/gambar1.png" className="mr-8 mb-8" alt="logo" />
                         <div>
-                            <div className="text-4xl font-semibold text-white mb-3">Tambah Guru Baru</div>
+                            <div className="text-4xl font-semibold text-white mb-3">Edit Guru</div>
                         </div>
                     </div>
                     <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-2xl bg-white">
@@ -158,12 +172,18 @@ const MengelolaGuruDetail = () => {
                                     </div>
                                     <div className="mb-10">
                                         <div className="text-2xl font-semibold mb-3">Mata Pelajaran</div>
-                                        <div className="flex">
+                                        <div className="flex flex-wrap">
                                             {
                                                 listMataPelajaran.filter(y => y.enable_flag == "Y").map((x) => (
                                                     <>
                                                         <label className={styles.radioLabel}>
-                                                            <input onChange={handleChange4} className={styles.radioInput} type="radio" name="matapelajaran" value={x.id} /><span>{x.nama_mata_pelajaran}</span>
+                                                            <input
+                                                                onChange={handleChange4}
+                                                                className={styles.radioInput}
+                                                                type="radio"
+                                                                name="matapelajaran"
+                                                                checked={x.id == mataPelajaran}
+                                                                value={x.id} /><span>{x.nama_mata_pelajaran} {x.kd_mata_pelajaran}</span>
                                                         </label>
                                                     </>
                                                 ))

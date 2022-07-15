@@ -80,9 +80,11 @@ const TambahSiswaPage = () => {
         console.log("kelas" + kelas)
         console.log("tahun" + tahunPelajaran)
         console.log("ekskul" + ekstrakulikuler)
+        const [year, month, day] = ttl.split('-');
 
+        const result = `${month}/${day}/${year}`;
         axios
-            .post(`https://methodist-app.vercel.app/siswa/store?nis=${nis}&nama_siswa=${nama}&nisn=${nis}&kelas_id=${kelas}&enable_flag=Y&jns_kelamin=Perempuan&tempat_lahir=Medan&tgl_lahir=${ttl}&alamat=medan&ekskul_id=${ekstrakulikuler}`)
+            .post(`https://methodist-app.vercel.app/siswa/store?nis=${nis}&nama_siswa=${nama}&nisn=${nis}&kelas_id=${kelas}&enable_flag=Y&jns_kelamin=Perempuan&tempat_lahir=Medan&tgl_lahir=${result}&alamat=medan&ekskul_id=${ekstrakulikuler}&tahun_ajar_id=${tahunPelajaran}`)
             .then((res) => {
                 alert("Siswa Berhasil Ditambahkan");
                 setTimeout(() => {
@@ -126,6 +128,7 @@ const TambahSiswaPage = () => {
                                                     className={`shadow-sm border-gray-300 rounded-lg py-3 px-4 w-full  mb-10 focus: ring-2 focus:ring-indigo-200 focus:border-indigo-400`}
                                                     placeholder="DD/MM/YYYY"
                                                     onChange={handleChange2}
+                                                    type="date"
                                                 />
                                             </div>
                                             <div className="w-60 mr-10">

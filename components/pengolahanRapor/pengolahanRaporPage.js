@@ -104,12 +104,12 @@ const PengolahanRaporPage = () => {
                             </div>
                             <div className="mx-2">
                                 <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-2xl bg-white py-3 px-10">
-                                    Print Rapor
+                                    Print Rapor Kelas
                                 </div>
                             </div>
                             <div className="mx-2">
                                 <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-2xl bg-white py-3 px-10">
-                                    Print Leger
+                                    Print Leger Kelas
                                 </div>
                             </div>
                         </div>

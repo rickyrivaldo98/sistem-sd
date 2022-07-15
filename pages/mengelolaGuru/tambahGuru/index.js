@@ -62,9 +62,12 @@ const TambahSiswaPage = () => {
         bodyFormData.append('password', password);
         if (waliKelas == 3) {
             bodyFormData.append('lvl_akses', waliKelas);
+        } else if (waliKelas == '') {
+            bodyFormData.append('lvl_akses', lvlAkses);
         } else {
-            bodyFormData.append('lvl_akses', 2);
+            bodyFormData.append('kelas_id', waliKelas);
         }
+        bodyFormData.append('mata_pelajaran_id', mataPelajaran);
         bodyFormData.append('enable_flag', "Y");
         bodyFormData.append('jns_kelamin', "Laki-Laki");
         bodyFormData.append('tempat_lahir', "Medan");
@@ -131,12 +134,12 @@ const TambahSiswaPage = () => {
                                     </div>
                                     <div className="mb-10">
                                         <div className="text-2xl font-semibold mb-3">Mata Pelajaran</div>
-                                        <div className="flex">
+                                        <div className="flex flex-wrap">
                                             {
                                                 listMataPelajaran.filter(y => y.enable_flag == "Y").map((x) => (
                                                     <>
                                                         <label className={styles.radioLabel}>
-                                                            <input onChange={handleChange4} className={styles.radioInput} type="radio" name="matapelajaran" value={x.id} /><span>{x.nama_mata_pelajaran}</span>
+                                                            <input onChange={handleChange4} className={styles.radioInput} type="radio" name="matapelajaran" value={x.id} /><span>{x.nama_mata_pelajaran} {x.kd_mata_pelajaran}</span>
                                                         </label>
                                                     </>
                                                 ))
