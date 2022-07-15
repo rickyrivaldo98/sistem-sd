@@ -1,7 +1,6 @@
 import { React, useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from 'next/router'
-import Image from 'next/image'
 import { getId, getLevel } from "../../lib/common";
 
 // import { LinkProps } from "next/link";
@@ -56,7 +55,7 @@ const Sidebar = () => {
                             className="md:block text-center md:pb-2 text-gray-700 mr-0 inline-block whitespace-no-wrap text-xl  font-bold p-4 px-0"
                         >Sistem Manajemen <br /> Penilaian Mahasiswa</div>
                     </Link>
-                    <Image src="/images/login/logo.png" alt="logo" width={441} height={99} />
+                    <img src="/images/login/logo.png" alt="" />
                     <div
                         className={
                             "md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-4 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded " +

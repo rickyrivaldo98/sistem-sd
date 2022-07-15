@@ -88,7 +88,7 @@ const MengelolaGuruDetail = () => {
         } else if (waliKelas == '') {
             bodyFormData.append('lvl_akses', lvlAkses);
         } else {
-            bodyFormData.append('lvl_akses', 2);
+            bodyFormData.append('kelas_id', 2);
         }
         // bodyFormData.append('enable_flag', "Y");
         // bodyFormData.append('jns_kelamin', "Laki-Laki");
@@ -160,7 +160,7 @@ const MengelolaGuruDetail = () => {
                                         <div className="text-2xl font-semibold mb-3">Mata Pelajaran</div>
                                         <div className="flex">
                                             {
-                                                listMataPelajaran.map((x) => (
+                                                listMataPelajaran.filter(y => y.enable_flag == "Y").map((x) => (
                                                     <>
                                                         <label className={styles.radioLabel}>
                                                             <input onChange={handleChange4} className={styles.radioInput} type="radio" name="matapelajaran" value={x.id} /><span>{x.nama_mata_pelajaran}</span>

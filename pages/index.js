@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styles from '../styles/login.module.scss'
-import Image from 'next/image'
 import axios from "axios";
 import { setUserSession } from "../lib/common";
 import Router, { withRouter } from 'next/router'
@@ -53,7 +52,7 @@ export default function Login() {
             <div className='m-auto w-3/5 '>
               <div className={styles.headerContent}>Sistem Manajemen <br /> Penilaian Siswa</div>
               <div className={styles.logo}>
-                <Image src="/images/login/logo.png" alt="logo" width={441} height={99} />
+                <img src="/images/login/logo.png" alt="" />
               </div>
               <div className={styles.headerInput}>
                 Username

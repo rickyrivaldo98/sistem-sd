@@ -82,7 +82,7 @@ const TambahSiswaPage = () => {
         console.log("ekskul" + ekstrakulikuler)
 
         axios
-            .post(`https://methodist-app.vercel.app/siswa/store?nis=${nis}&nama_siswa=${nama}&nisn=${nis}&kelas_id=${kelas}&enable_flag=Y&jns_kelamin=Perempuan&tempat_lahir=Medan&tgl_lahir=27/04/1999&alamat=medan`)
+            .post(`https://methodist-app.vercel.app/siswa/store?nis=${nis}&nama_siswa=${nama}&nisn=${nis}&kelas_id=${kelas}&enable_flag=Y&jns_kelamin=Perempuan&tempat_lahir=Medan&tgl_lahir=${ttl}&alamat=medan&ekskul_id=${ekstrakulikuler}`)
             .then((res) => {
                 alert("Siswa Berhasil Ditambahkan");
                 setTimeout(() => {

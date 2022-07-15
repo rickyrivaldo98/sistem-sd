@@ -133,7 +133,7 @@ const TambahSiswaPage = () => {
                                         <div className="text-2xl font-semibold mb-3">Mata Pelajaran</div>
                                         <div className="flex">
                                             {
-                                                listMataPelajaran.map((x) => (
+                                                listMataPelajaran.filter(y => y.enable_flag == "Y").map((x) => (
                                                     <>
                                                         <label className={styles.radioLabel}>
                                                             <input onChange={handleChange4} className={styles.radioInput} type="radio" name="matapelajaran" value={x.id} /><span>{x.nama_mata_pelajaran}</span>
